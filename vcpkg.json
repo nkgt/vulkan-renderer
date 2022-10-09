@@ -1,0 +1,11 @@
+{
+    "name": "vulkan-renderer",
+    "version-string": "0.0.0",
+    "dependencies": [
+      "benchmark",
+      "catch2",
+      "fmt",
+      "glm",
+      "spdlog"
+    ]
+  }
