@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef VULKAN_HPP_NO_EXCEPTIONS
 #define VULKAN_HPP_NO_EXCEPTIONS
 #endif
