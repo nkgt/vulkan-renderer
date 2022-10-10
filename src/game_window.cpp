@@ -40,13 +40,13 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
 GameWindow::GameWindow(
 	std::size_t width,
 	std::size_t height,
-	std::wstring window_name,
-	int* handle,
-	int cmdShow
+	std::wstring window_name
 ) {
+	HINSTANCE hInstance = GetModuleHandle(0);
+
 	WNDCLASS wc{
 		.lpfnWndProc = WindowProc,
-		.hInstance = reinterpret_cast<HINSTANCE>(handle),
+		.hInstance = hInstance,
 		.lpszClassName = window_name.c_str()
 	};
 
@@ -61,7 +61,7 @@ GameWindow::GameWindow(
 		static_cast<int>(width), static_cast<int>(height),
 		nullptr,
 		nullptr,
-		reinterpret_cast<HINSTANCE>(handle),
+		hInstance,
 		nullptr
 	);
 
@@ -72,7 +72,7 @@ GameWindow::GameWindow(
 		throw std::runtime_error(error_message);
 	}
 
-	ShowWindow(hwnd, cmdShow);
+	ShowWindow(hwnd, 5);
 }
 
 void GameWindow::loop() const {

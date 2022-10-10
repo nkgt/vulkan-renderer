@@ -7,9 +7,7 @@ public:
 	GameWindow(
 		std::size_t width,
 		std::size_t height,
-		std::wstring window_name,
-		int* handle,
-		int cmdShow
+		std::wstring window_name
 	);
 
 	void loop() const;
