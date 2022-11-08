@@ -11,12 +11,16 @@ find_package(Vulkan REQUIRED)
 
 set(vulkan_renderer_SOURCES
     src/game_window.cpp
+    src/physical_device.cpp
     src/instance.cpp
+    src/renderer.cpp
 )
 
 set(vulkan_renderer_HEADERS
     include/vulkan-renderer/window/game_window.hpp
+    include/vulkan-renderer/vulkan/physical_device.hpp
     include/vulkan-renderer/vulkan/instance.hpp
+    include/vulkan-renderer/vulkan/renderer.hpp
 )
 
 add_library(vulkan_renderer STATIC

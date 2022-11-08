@@ -48,8 +48,8 @@ Instance::Instance(std::string application_name) {
     };
 
     vk::DebugUtilsMessengerCreateInfoEXT messenger_info {
-        .messageSeverity = vk::DebugUtilsMessageSeverityFlagBitsEXT::eVerbose |
-                           vk::DebugUtilsMessageSeverityFlagBitsEXT::eInfo    |
+        .messageSeverity = // vk::DebugUtilsMessageSeverityFlagBitsEXT::eVerbose |
+                           // vk::DebugUtilsMessageSeverityFlagBitsEXT::eInfo    |
                            vk::DebugUtilsMessageSeverityFlagBitsEXT::eWarning |
                            vk::DebugUtilsMessageSeverityFlagBitsEXT::eError,
         .messageType = vk::DebugUtilsMessageTypeFlagBitsEXT::eGeneral     |
@@ -104,4 +104,8 @@ Instance::~Instance() {
     m_instance.destroyDebugUtilsMessengerEXT(m_messenger, nullptr, m_loader);
 #endif
     m_instance.destroy();
+}
+
+const vk::Instance& Instance::get() const noexcept {
+    return m_instance;
 }

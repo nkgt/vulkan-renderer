@@ -21,6 +21,8 @@ public:
     explicit Instance(std::string application_name);
     ~Instance();
 
+    const vk::Instance& get() const noexcept;
+
 private:
 #ifndef NDEBUG
     vk::DebugUtilsMessengerEXT m_messenger;
