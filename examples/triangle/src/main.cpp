@@ -1,12 +1,9 @@
-﻿#include "vulkan-renderer/window/game_window.hpp"
-#include "vulkan-renderer/vulkan/renderer.hpp"
+﻿#include "vulkan-renderer/vulkan/renderer.hpp"
 
 int main()
 {
-    GameWindow window(800, 600, L"三角形");
-    Backend backend("Triangle");
-
-    window.loop();
+    Backend backend(800, 600, L"三角形", "Triangle");
+    backend.loop();
 
     return 0;
 }

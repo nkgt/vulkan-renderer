@@ -16,11 +16,12 @@
 
 class Device {
 public:
-	Device(const vk::Instance& instance);
+	Device(const vk::Instance& instance, const vk::SurfaceKHR& surface);
 	~Device();
 
 private:
 	vk::PhysicalDevice m_physical_device;
 	vk::Device m_device;
 	vk::Queue m_graphics_queue;
+	vk::Queue m_present_queue;
 };

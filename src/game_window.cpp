@@ -1,17 +1,18 @@
 #include "vulkan-renderer/window/game_window.hpp"
 
-#ifndef UNICODE
-#define UNICODE
-#endif
-
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-
-#ifndef NOMINMAX
-#define NOMINMAX
-#endif
-#include "windows.h"
+//#ifndef UNICODE
+//#define UNICODE
+//#endif
+//
+//#ifndef WIN32_LEAN_AND_MEAN
+//#define WIN32_LEAN_AND_MEAN
+//#endif
+//
+//#ifndef NOMINMAX
+//#define NOMINMAX
+//#endif
+//
+//#include "windows.h"
 
 #include "spdlog/spdlog.h"
 
@@ -40,8 +41,10 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
 GameWindow::GameWindow(
 	std::size_t width,
 	std::size_t height,
-	std::wstring window_name
-) {
+	const std::wstring& window_name,
+	const vk::Instance* instance
+)	: m_instance{ instance }
+{
 	HINSTANCE hInstance = GetModuleHandle(0);
 
 	WNDCLASS wc{
@@ -72,6 +75,24 @@ GameWindow::GameWindow(
 		throw std::runtime_error(error_message);
 	}
 
+	vk::Win32SurfaceCreateInfoKHR create_info{
+		.hinstance = hInstance,
+		.hwnd = hwnd
+	};
+
+	const auto [result, surface] = m_instance->createWin32SurfaceKHR(create_info);
+
+	if (result == vk::Result::eSuccess) {
+		m_surface = surface;
+		spdlog::info("SurfaceKHR created");
+	}
+	else {
+		auto error_message = std::format("Failed to create Vulkan device! Error: {}", vk::to_string(result));
+
+		spdlog::error(error_message);
+		throw std::runtime_error(error_message);
+	}
+
 	ShowWindow(hwnd, 5);
 }
 
@@ -81,4 +102,12 @@ void GameWindow::loop() const {
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+}
+
+const vk::SurfaceKHR& GameWindow::get_surface() const noexcept {
+	return m_surface;
+}
+
+GameWindow::~GameWindow() {
+	m_instance->destroySurfaceKHR(m_surface);
 }

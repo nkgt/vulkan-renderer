@@ -12,6 +12,10 @@
 #define VK_USE_PLATFORM_WIN32_KHR
 #endif
 
+#ifndef VULKAN_HPP_NO_SETTERS
+#define VULKAN_HPP_NO_SETTERS
+#endif
+
 #include "vulkan/vulkan.hpp"
 
 #include <string>
