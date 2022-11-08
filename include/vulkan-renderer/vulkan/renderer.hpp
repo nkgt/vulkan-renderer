@@ -1,7 +1,7 @@
 #pragma once
 
 #include "vulkan-renderer/vulkan/instance.hpp"
-#include "vulkan-renderer/vulkan/physical_device.hpp"
+#include "vulkan-renderer/vulkan/device.hpp"
 
 class Backend {
 public:
@@ -9,5 +9,5 @@ public:
 
 private:
 	Instance m_instance;
-	PhysicalDevice m_physical_device;
+	Device m_device;
 };

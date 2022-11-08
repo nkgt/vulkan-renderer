@@ -14,10 +14,13 @@
 
 #include "vulkan/vulkan.hpp"
 
-class PhysicalDevice {
+class Device {
 public:
-	PhysicalDevice(const vk::Instance& instance);
+	Device(const vk::Instance& instance);
+	~Device();
 
 private:
 	vk::PhysicalDevice m_physical_device;
+	vk::Device m_device;
+	vk::Queue m_graphics_queue;
 };
